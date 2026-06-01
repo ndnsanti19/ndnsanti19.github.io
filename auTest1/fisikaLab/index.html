@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jurnal Fisika Cilik | NDN 2026</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Nunito', sans-serif; background-image: radial-gradient(#e5e7eb 1px, transparent 1px); background-size: 20px 20px; }
+    </style>
+</head>
+<body class="bg-blue-50 text-gray-800 min-h-screen">
+    <div class="max-w-3xl mx-auto p-4 py-8">
+        <header class="text-center mb-8 bg-white p-6 rounded-3xl shadow-lg border-4 border-yellow-400">
+            <h1 class="text-4xl font-black text-blue-600 mb-2">🚀 Jurnal Eksperimen NDN</h1>
+            <p class="text-lg font-bold text-gray-500">Catat penemuan kreatif oleh Rahmi & Mustika.</p>
+            <p class="mt-4 text-sm text-slate-400"><a href="https://ndnsanti19.github.io/listproject.html" class="text-blue-600 hover:underline" target="_blank" rel="noreferrer noopener">← Kembali ke daftar project</a></p>
+        </header>
+
+        <main class="bg-white p-6 rounded-3xl shadow-md border-2 border-blue-200 mb-8">
+            <h2 class="text-2xl font-bold text-indigo-600 mb-4">✨ Tambah Penemuan Baru</h2>
+            <form id="formEksperimen" class="space-y-4">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-sm font-bold text-gray-700 mb-1">Nama Eksperimen</label>
+                        <input type="text" id="namaEksperimen" required placeholder="Contoh: Balon Ajaib" class="w-full px-4 py-2 border-2 border-gray-300 rounded-xl focus:outline-none focus:border-blue-500">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-bold text-gray-700 mb-1">Kamu Kelas Berapa?</label>
+                        <select id="kelas" required class="w-full px-4 py-2 border-2 border-gray-300 rounded-xl focus:outline-none focus:border-blue-500">
+                            <option value="">Pilih Kelas...</option>
+                            <option value="Kelas 1">Kelas 1</option>
+                            <option value="Kelas 2">Kelas 2</option>
+                            <option value="Kelas 3">Kelas 3</option>
+                            <option value="Kelas 4">Kelas 4</option>
+                            <option value="Kelas 5">Kelas 5</option>
+                            <option value="Kelas 6">Kelas 6</option>
+                        </select>
+                    </div>
+                </div>
+                <div>
+                    <label class="block text-sm font-bold text-gray-700 mb-1">Alat & Bahan 🧪</label>
+                    <textarea id="alatBahan" required rows="2" placeholder="Apa saja yang kamu pakai?" class="w-full px-4 py-2 border-2 border-gray-300 rounded-xl focus:outline-none focus:border-blue-500"></textarea>
+                </div>
+                <div>
+                    <label class="block text-sm font-bold text-gray-700 mb-1">Apa yang Terjadi? (Hasil) 💡</label>
+                    <textarea id="hasil" required rows="2" placeholder="Ceritakan keajaiban yang kamu lihat!" class="w-full px-4 py-2 border-2 border-gray-300 rounded-xl focus:outline-none focus:border-blue-500"></textarea>
+                </div>
+                <button type="submit" class="w-full bg-yellow-400 hover:bg-yellow-500 text-gray-900 font-black text-lg py-3 rounded-xl transition duration-300 transform hover:-translate-y-1 shadow-lg">Simpan Catatan Eksperimen! 📝</button>
+            </form>
+        </main>
+
+        <div>
+            <h2 class="text-2xl font-bold text-gray-800 mb-4 px-2">📚 Daftar Penemuan Ilmuwan Cilik:</h2>
+            <div id="daftarEksperimen" class="space-y-4">
+                <p class="text-center text-gray-500 italic mt-4" id="pesanKosong">Belum ada eksperimen yang dicatat. Ayo mulai!</p>
+            </div>
+        </div>
+
+        <footer class="mt-12 text-center text-sm font-bold text-gray-400">
+            <p>Dibuat dengan ❤️ oleh NDN Team — Rahmi & Mustika | &copy; 2026</p>
+            <p>Untuk Ilmuwan Cilik Masa Depan Indonesia</p>
+        </footer>
+    </div>
+
+    <script>
+        let dataEksperimen = [];
+        const form = document.getElementById('formEksperimen');
+        const wadahDaftar = document.getElementById('daftarEksperimen');
+        const pesanKosong = document.getElementById('pesanKosong');
+
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const nama = document.getElementById('namaEksperimen').value;
+            const kelas = document.getElementById('kelas').value;
+            const alat = document.getElementById('alatBahan').value;
+            const hasil = document.getElementById('hasil').value;
+            const eksperimenBaru = { id: Date.now(), nama: nama, kelas: kelas, alat: alat, hasil: hasil };
+            dataEksperimen.push(eksperimenBaru);
+            form.reset();
+            renderDaftar();
+        });
+
+        function renderDaftar() {
+            if (dataEksperimen.length > 0) pesanKosong.style.display = 'none';
+            wadahDaftar.innerHTML = '';
+            dataEksperimen.forEach(function(item) {
+                const warnaBg = ['bg-pink-100', 'bg-green-100', 'bg-purple-100', 'bg-orange-100'];
+                const warnaPilihan = warnaBg[item.id % warnaBg.length];
+                const kartuHTML = `
+                    <div class="${warnaPilihan} p-5 rounded-3xl border-2 border-white shadow-md relative group transition duration-300 hover:shadow-lg hover:-translate-y-1">
+                        <span class="absolute top-4 right-4 bg-white px-3 py-1 rounded-full text-xs font-black text-gray-600 shadow-sm">${item.kelas}</span>
+                        <h3 class="text-xl font-black text-gray-800 mb-2">🎈 ${item.nama}</h3>
+                        <div class="mb-2">
+                            <strong class="text-sm text-gray-700">Alat & Bahan:</strong>
+                            <p class="text-gray-600 text-sm bg-white bg-opacity-50 p-2 rounded-lg mt-1">${item.alat}</p>
+                        </div>
+                        <div>
+                            <strong class="text-sm text-gray-700">Hasilnya:</strong>
+                            <p class="text-gray-600 text-sm bg-white bg-opacity-50 p-2 rounded-lg mt-1">${item.hasil}</p>
+                        </div>
+                        <button onclick="hapusData(${item.id})" class="mt-3 text-red-500 text-sm font-bold hover:text-red-700 underline">Hapus Catatan</button>
+                    </div>
+                `;
+                wadahDaftar.insertAdjacentHTML('beforeend', kartuHTML);
+            });
+            if (dataEksperimen.length === 0) {
+                wadahDaftar.appendChild(pesanKosong);
+                pesanKosong.style.display = 'block';
+            }
+        }
+
+        function hapusData(id) {
+            dataEksperimen = dataEksperimen.filter(item => item.id !== id);
+            renderDaftar();
+        }
+    </script>
+</body>
+</html>

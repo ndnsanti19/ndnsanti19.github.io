@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NDN Manga Studio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-slate-50 text-slate-900 font-sans">
+    <header class="bg-white shadow-sm py-6">
+        <div class="container mx-auto px-4 text-center">
+            <h1 class="text-4xl font-bold text-slate-900">NDN Manga Studio</h1>
+            <p class="text-slate-500 mt-2">Panduan kreatif oleh tim NDN: Angga & Ariel.</p>
+            <p class="text-sm text-slate-400 mt-3">Halaman Native HTML + Tailwind + JS interaktif.</p>
+            <p class="mt-4"><a href="https://ndnsanti19.github.io/listproject.html" class="text-blue-600 hover:underline" target="_blank" rel="noreferrer noopener">← Kembali ke daftar project</a></p>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-4 py-10">
+        <section class="max-w-3xl mx-auto bg-white p-8 rounded-xl shadow-md">
+            <h2 class="text-2xl font-semibold mb-4">Selamat Datang di Studio NDN</h2>
+            <p class="mb-6 leading-relaxed text-slate-600">
+                Menggambar manga adalah cara kami menyatukan ide kreatif tim NDN melalui karakter dan komposisi visual.
+                Pelajari teknik dasar, bentuk wajah, dan ekspresi singkat bersama Angga & Ariel.
+            </p>
+            <div class="grid md:grid-cols-2 gap-6 mt-8">
+                <div class="bg-sky-50 p-6 rounded-xl border border-slate-200">
+                    <h3 class="font-bold text-slate-900 mb-2">Persiapan Alat</h3>
+                    <ul class="text-sm space-y-2 text-slate-600">
+                        <li>• Pensil mekanik 0.5</li>
+                        <li>• Kertas gambar A4</li>
+                        <li>• Penghapus lembut</li>
+                        <li>• Drawing pen untuk outline</li>
+                    </ul>
+                </div>
+                <div class="bg-sky-50 p-6 rounded-xl border border-slate-200">
+                    <h3 class="font-bold text-slate-900 mb-2">Langkah Kreatif</h3>
+                    <p class="text-sm text-slate-600">
+                        Mulai dengan pola lingkaran, buat proporsi wajah, lalu tambahkan detail karakter dengan mood cerita yang kamu pilih.
+                    </p>
+                </div>
+            </div>
+            <div class="mt-10 text-center">
+                <button id="showTip" class="bg-sky-500 hover:bg-sky-600 text-white font-bold py-3 px-8 rounded-full transition">Tampilkan Tip NDN</button>
+                <p id="tipText" class="mt-4 text-slate-600 hidden">Tip: Jangan takut membuat kesalahan. Sketsa awal adalah cara terbaik untuk menemukan bentuk unik.</p>
+            </div>
+        </section>
+    </main>
+
+    <footer class="text-center py-8 text-slate-500 text-sm">
+        <p>&copy; 2026 NDN Team. Ditampilkan oleh Angga & Ariel.</p>
+    </footer>
+
+    <script>
+        document.getElementById('showTip').addEventListener('click', function() {
+            const tipText = document.getElementById('tipText');
+            tipText.classList.toggle('hidden');
+        });
+    </script>
+</body>
+</html>

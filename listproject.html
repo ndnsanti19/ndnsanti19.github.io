@@ -1,0 +1,242 @@
+<!doctype html>
+<html lang="id">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Daftar Project — NDN Team</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        ivory: '#F9F6EE',
+                        skysoft: '#cfe9ff',
+                        redpastel: '#ffd6d6'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        :root{--bg-ivory:#F9F6EE;--blue-soft:#cfe9ff;--red-pastel:#ffd6d6}
+        body{background:var(--bg-ivory);font-family:Inter,ui-sans-serif,system-ui,-apple-system,'Segoe UI',Roboto,'Helvetica Neue',Arial}
+        .frame-sides{border-left:10px solid var(--blue-soft);border-right:10px solid var(--red-pastel)}
+        .project-card {transition: transform 0.2s ease, box-shadow 0.2s ease;}
+        .project-card:hover {transform: translateY(-4px);}
+    </style>
+</head>
+<body class="min-h-screen text-slate-800">
+
+    <div class="frame-sides">
+        <header class="max-w-6xl mx-auto px-6 py-8 text-center">
+            <h1 class="text-4xl md:text-5xl font-extrabold">NDN — Daftar Project</h1>
+            <p class="mt-2 text-slate-600">Proyek-proyek NDN menampilkan karya digital tim: Angga, Ariel, Rahmi, dan Mustika.</p>
+        </header>
+
+        <section class="max-w-6xl mx-auto px-6">
+            <div class="bg-white shadow-lg rounded-2xl p-8 md:p-12 text-center">
+                <h2 class="text-3xl font-bold text-slate-900">Selamat datang di showcase NDN</h2>
+                <p class="mt-3 text-slate-600 max-w-2xl mx-auto">Temukan 8 halaman cabang kami — setiap project berisi pengalaman interaktif dan narasi tim NDN.</p>
+
+                <div class="mt-6 flex flex-wrap justify-center items-center gap-3">
+                    <button id="btn-all" class="px-4 py-2 rounded-full bg-skysoft text-slate-800 font-medium">Semua</button>
+                    <button class="filter-btn px-4 py-2 rounded-full bg-white border border-slate-200" data-member="Angga">Angga</button>
+                    <button class="filter-btn px-4 py-2 rounded-full bg-white border border-slate-200" data-member="Ariel">Ariel</button>
+                    <button class="filter-btn px-4 py-2 rounded-full bg-white border border-slate-200" data-member="Rahmi">Rahmi</button>
+                    <button class="filter-btn px-4 py-2 rounded-full bg-white border border-slate-200" data-member="Mustika">Mustika</button>
+                    <input id="search" placeholder="Cari project..." class="ml-2 px-3 py-2 rounded-lg border border-slate-200" />
+                </div>
+            </div>
+        </section>
+
+        <main class="max-w-6xl mx-auto px-6 py-10">
+            <div id="projects" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6">
+                <article class="project-card bg-white rounded-xl shadow p-6" data-member="Ariel">
+                    <div class="flex items-start justify-between">
+                        <div>
+                            <h3 class="text-xl font-semibold">J-SATIRE MADESU</h3>
+                            <p class="mt-2 text-sm text-slate-600">Web upload jurnal satire oleh Ariel; riset absurd, kucing oren, dan matematika colokan USB yang tidak relevan.</p>
+                        </div>
+                        <div class="text-sm text-slate-400">Ariel</div>
+                    </div>
+                    <div class="mt-4 flex gap-2">
+                        <span class="px-3 py-1 rounded-full bg-skysoft text-slate-800 text-xs">Satire</span>
+                        <span class="px-3 py-1 rounded-full bg-redpastel text-slate-800 text-xs">Web App</span>
+                    </div>
+                    <div class="mt-4 flex flex-col gap-3">
+                        <a href="https://j-satire-madesu.vercel.app/" target="_blank" rel="noreferrer noopener" class="inline-block px-4 py-2 rounded-lg bg-skysoft text-slate-900 text-center font-semibold">Buka Project</a>
+                    </div>
+                </article>
+
+                <article class="project-card bg-white rounded-xl shadow p-6" data-member="Ariel">
+                    <div class="flex items-start justify-between">
+                        <div>
+                            <h3 class="text-xl font-semibold">NDN Manga Studio</h3>
+                            <p class="mt-2 text-sm text-slate-600">Workshop visual storytelling dan karakter manga oleh Angga & Ariel.</p>
+                        </div>
+                        <div class="text-sm text-slate-400">Ariel</div>
+                    </div>
+                    <div class="mt-4 flex gap-2">
+                        <span class="px-3 py-1 rounded-full bg-skysoft text-slate-800 text-xs">Illustration</span>
+                        <span class="px-3 py-1 rounded-full bg-redpastel text-slate-800 text-xs">Creative</span>
+                    </div>
+                    <div class="mt-4 flex flex-col gap-3">
+                        <a href="auTest1/index.html" class="inline-block px-4 py-2 rounded-lg bg-skysoft text-slate-900 text-center font-semibold">Buka Project</a>
+                    </div>
+                </article>
+
+                <article class="project-card bg-white rounded-xl shadow p-6" data-member="Ariel">
+                    <div class="flex items-start justify-between">
+                        <div>
+                            <h3 class="text-xl font-semibold">NDN Birthday Edition</h3>
+                            <p class="mt-2 text-sm text-slate-600">Halaman ulang tahun kreatif NDN bersama Ariel & Mustika.</p>
+                        </div>
+                        <div class="text-sm text-slate-400">Ariel</div>
+                    </div>
+                    <div class="mt-4 flex gap-2">
+                        <span class="px-3 py-1 rounded-full bg-skysoft text-slate-800 text-xs">Event</span>
+                        <span class="px-3 py-1 rounded-full bg-redpastel text-slate-800 text-xs">Story</span>
+                    </div>
+                    <div class="mt-4 flex flex-col gap-3">
+                        <a href="auTest1/Ultah24Ariel/index.html" class="inline-block px-4 py-2 rounded-lg bg-skysoft text-slate-900 text-center font-semibold">Buka Project</a>
+                    </div>
+                </article>
+
+                <article class="project-card bg-white rounded-xl shadow p-6" data-member="Rahmi">
+                    <div class="flex items-start justify-between">
+                        <div>
+                            <h3 class="text-xl font-semibold">NDN Qurban Assembly</h3>
+                            <p class="mt-2 text-sm text-slate-600">Sistem manajemen qurban oleh Rahmi & Mustika.</p>
+                        </div>
+                        <div class="text-sm text-slate-400">Rahmi</div>
+                    </div>
+                    <div class="mt-4 flex gap-2">
+                        <span class="px-3 py-1 rounded-full bg-skysoft text-slate-800 text-xs">Logistics</span>
+                        <span class="px-3 py-1 rounded-full bg-redpastel text-slate-800 text-xs">Process</span>
+                    </div>
+                    <div class="mt-4 flex flex-col gap-3">
+                        <a href="auTest1/Kurban%20Assembly%20Line/index.html" class="inline-block px-4 py-2 rounded-lg bg-skysoft text-slate-900 text-center font-semibold">Buka Project</a>
+                    </div>
+                </article>
+
+                <article class="project-card bg-white rounded-xl shadow p-6" data-member="Mustika">
+                    <div class="flex items-start justify-between">
+                        <div>
+                            <h3 class="text-xl font-semibold">NDN Fitra Story</h3>
+                            <p class="mt-2 text-sm text-slate-600">Narasi visual lifestyle oleh Mustika dan Angga.</p>
+                        </div>
+                        <div class="text-sm text-slate-400">Mustika</div>
+                    </div>
+                    <div class="mt-4 flex gap-2">
+                        <span class="px-3 py-1 rounded-full bg-skysoft text-slate-800 text-xs">Story</span>
+                        <span class="px-3 py-1 rounded-full bg-redpastel text-slate-800 text-xs">Mood</span>
+                    </div>
+                    <div class="mt-4 flex flex-col gap-3">
+                        <a href="auTest1/Fitratapicluadejelek/index.html" class="inline-block px-4 py-2 rounded-lg bg-skysoft text-slate-900 text-center font-semibold">Buka Project</a>
+                    </div>
+                </article>
+
+                <article class="project-card bg-white rounded-xl shadow p-6" data-member="Angga">
+                    <div class="flex items-start justify-between">
+                        <div>
+                            <h3 class="text-xl font-semibold">NDN Reunion Booth</h3>
+                            <p class="mt-2 text-sm text-slate-600">Photobooth reuni digital oleh Angga & Rahmi.</p>
+                        </div>
+                        <div class="text-sm text-slate-400">Angga</div>
+                    </div>
+                    <div class="mt-4 flex gap-2">
+                        <span class="px-3 py-1 rounded-full bg-skysoft text-slate-800 text-xs">Media</span>
+                        <span class="px-3 py-1 rounded-full bg-redpastel text-slate-800 text-xs">Album</span>
+                    </div>
+                    <div class="mt-4 flex flex-col gap-3">
+                        <a href="auTest1/kamerareuni/index.html" class="inline-block px-4 py-2 rounded-lg bg-skysoft text-slate-900 text-center font-semibold">Buka Project</a>
+                    </div>
+                </article>
+
+                <article class="project-card bg-white rounded-xl shadow p-6" data-member="Angga">
+                    <div class="flex items-start justify-between">
+                        <div>
+                            <h3 class="text-xl font-semibold">NDN Matcha Lab</h3>
+                            <p class="mt-2 text-sm text-slate-600">Eksperimen minuman kreatif oleh Angga dan NDN Team.</p>
+                        </div>
+                        <div class="text-sm text-slate-400">Angga</div>
+                    </div>
+                    <div class="mt-4 flex gap-2">
+                        <span class="px-3 py-1 rounded-full bg-skysoft text-slate-800 text-xs">FoodTech</span>
+                        <span class="px-3 py-1 rounded-full bg-redpastel text-slate-800 text-xs">Simulasi</span>
+                    </div>
+                    <div class="mt-4 flex flex-col gap-3">
+                        <a href="auTest1/Capek23Mei/index.html" class="inline-block px-4 py-2 rounded-lg bg-skysoft text-slate-900 text-center font-semibold">Buka Project</a>
+                    </div>
+                </article>
+
+                <article class="project-card bg-white rounded-xl shadow p-6" data-member="Rahmi">
+                    <div class="flex items-start justify-between">
+                        <div>
+                            <h3 class="text-xl font-semibold">NDN Fisika Cilik</h3>
+                            <p class="mt-2 text-sm text-slate-600">Jurnal eksperimen oleh Rahmi & Mustika untuk anak kreatif.</p>
+                        </div>
+                        <div class="text-sm text-slate-400">Rahmi</div>
+                    </div>
+                    <div class="mt-4 flex gap-2">
+                        <span class="px-3 py-1 rounded-full bg-skysoft text-slate-800 text-xs">Education</span>
+                        <span class="px-3 py-1 rounded-full bg-redpastel text-slate-800 text-xs">Science</span>
+                    </div>
+                    <div class="mt-4 flex flex-col gap-3">
+                        <a href="auTest1/fisikaLab/index.html" class="inline-block px-4 py-2 rounded-lg bg-skysoft text-slate-900 text-center font-semibold">Buka Project</a>
+                    </div>
+                </article>
+            </div>
+        </main>
+
+        <footer class="max-w-6xl mx-auto px-6 py-10 text-slate-700 text-sm">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                    <h4 class="font-semibold">Kontak</h4>
+                    <p class="mt-2">Mail: <em>ndnsanti19@gmail.com</em></p>
+                    <p class="mt-1">Social:</p>
+                    <ul class="mt-2 space-y-1">
+                        <li><a class="text-blue-600 hover:underline" href="https://www.youtube.com/@ndnsanti" target="_blank">YouTube — ndnsanti</a></li>
+                        <li><a class="text-blue-600 hover:underline" href="https://www.instagram.com/ndnsanti/" target="_blank">Instagram — ndnsanti</a></li>
+                        <li><a class="text-blue-600 hover:underline" href="https://www.tiktok.com/@ndnsanti" target="_blank">TikTok — ndnsanti</a></li>
+                        <li><a class="text-blue-600 hover:underline" href="https://x.com/NandanSanti" target="_blank">X — NandanSanti</a></li>
+                        <li><a class="text-blue-600 hover:underline" href="https://medium.com/@ndnsanti19" target="_blank">Medium — ndnsanti19</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-semibold">Web & Link</h4>
+                    <p class="mt-2">Web: <a class="text-blue-600 hover:underline" href="https://ndnsanti19.github.io" target="_blank">ndnsanti19.github.io</a></p>
+                    <p class="mt-2">Linktree:</p>
+                    <p class="mt-1"><a class="text-blue-600 hover:underline" href="https://linktr.ee/ndnsanti" target="_blank">https://linktr.ee/ndnsanti</a></p>
+                </div>
+            </div>
+            <p class="mt-6 text-slate-500 text-xs">&copy; 2026 NDN Team. Dibuat dengan Tailwind CSS.</p>
+        </footer>
+    </div>
+
+    <script>
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const btnAll = document.getElementById('btn-all');
+        const projects = Array.from(document.querySelectorAll('.project-card'));
+        const search = document.getElementById('search');
+
+        function showMember(member) {
+            projects.forEach(p => {
+                if (member === 'All' || p.dataset.member === member) p.style.display = '';
+                else p.style.display = 'none';
+            });
+        }
+
+        filterBtns.forEach(b => b.addEventListener('click', () => showMember(b.dataset.member)));
+        btnAll.addEventListener('click', () => showMember('All'));
+        search.addEventListener('input', e => {
+            const q = e.target.value.toLowerCase();
+            projects.forEach(p => {
+                const text = p.innerText.toLowerCase();
+                p.style.display = text.includes(q) ? '' : 'none';
+            });
+        });
+    </script>
+</body>
+</html>

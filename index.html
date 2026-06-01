@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project NDN, Angga, Ariel, Rahmi, Mustika</title>
+    <!-- Tailwind CSS Play CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#1e293b',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://googleapis.com');
+        body { font-family: 'Inter', sans-serif; }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 transition-colors duration-300" id="bodyTag">
+
+    <!-- Header / Nav -->
+    <nav class="p-6 flex justify-between items-center max-w-5xl mx-auto">
+        <h1 class="text-xl font-bold tracking-tighter">PROJECT.NDN</h1>
+        <button id="themeToggle" class="p-2 bg-slate-200 rounded-full hover:bg-slate-300 transition-all">
+            <span id="themeIcon">🌙</span>
+        </button>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="max-w-5xl mx-auto px-6 py-20 flex flex-col items-center text-center">
+        <div class="space-y-4">
+            <h2 class="text-5xl md:text-7xl font-semibold text-slate-900 leading-tight">
+                NDN <br> <span class="text-blue-600">Angga, Ariel, Rahmi, Mustika</span>
+            </h2>
+            <p class="text-slate-500 text-lg max-w-md mx-auto">
+                Kolaborasi kreatif untuk membangun solusi digital yang bermakna dan estetik.
+            </p>
+        </div>
+
+        <!-- Action Area -->
+        <div class="mt-12 flex gap-4">
+            <button onclick="showAlert()" class="px-8 py-3 bg-slate-900 text-white rounded-lg hover:bg-slate-800 transition-all shadow-lg">
+                Klik Saya
+            </button>
+            <a href="https://ndnsanti19.github.io/listproject.html" target="_blank" class="px-8 py-3 border border-slate-300 rounded-lg hover:bg-white transition-all">
+                Buka Daftar Project
+            </a>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="fixed bottom-0 w-full p-6 text-center text-sm text-slate-400">
+        &copy; 2026 NDN Team. Dibuat dengan Tailwind CSS.
+    </footer>
+
+    <!-- JavaScript Interaktif -->
+    <script>
+        // Fungsi Alert Sederhana
+        function showAlert() {
+            alert('Halo dari NDN, Angga, Ariel, Rahmi, dan Mustika! Selamat datang di halaman project kami.');
+        }
+
+        // Fitur Dark Mode Sederhana
+        const btn = document.getElementById('themeToggle');
+        const body = document.getElementById('bodyTag');
+        const icon = document.getElementById('themeIcon');
+
+        btn.addEventListener('click', () => {
+            body.classList.toggle('bg-slate-900');
+            body.classList.toggle('text-white');
+            
+            if (body.classList.contains('bg-slate-900')) {
+                icon.innerText = '☀️';
+                btn.classList.replace('bg-slate-200', 'bg-slate-700');
+            } else {
+                icon.innerText = '🌙';
+                btn.classList.replace('bg-slate-700', 'bg-slate-200');
+            }
+        });
+    </script>
+</body>
+</html>

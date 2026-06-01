@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NDN Reunion Booth</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .page-view { display: none; }
+        .page-view.active { display: block; }
+    </style>
+</head>
+<body class="bg-amber-50 text-slate-800 font-sans min-h-screen flex flex-col">
+
+    <header class="bg-emerald-700 text-white shadow-md sticky top-0 z-50 print:hidden">
+        <div class="max-w-4xl mx-auto px-4 py-3 flex flex-col sm:flex-row justify-between items-center gap-4">
+            <div class="text-center sm:text-left">
+                <h1 class="text-xl font-bold tracking-wide flex items-center gap-2">🌙 NDN Reunion Booth</h1>
+                <p class="text-sm text-emerald-200">Photobooth digital reuni karya Angga & Rahmi.</p>
+            </div>
+            <div class="flex gap-2 items-center">
+                <a href="https://ndnsanti19.github.io/listproject.html" class="text-emerald-100 hover:text-white text-sm" target="_blank" rel="noreferrer noopener">← Kembali ke daftar project</a>
+            </div>
+        </div>
+    </header>
+
+    <main class="flex-grow max-w-4xl w-full mx-auto p-4">
+        <section id="page-booth" class="page-view active space-y-6 print:hidden">
+            <div class="text-center py-4">
+                <h2 class="text-2xl font-bold text-emerald-900">Digital Photobooth NDN</h2>
+                <p class="text-sm text-slate-600">Tangkap momen reuni dengan filter sederhana dan simpan langsung ke album digital.</p>
+            </div>
+
+            <div class="max-w-md mx-auto bg-white p-4 rounded-2xl shadow-lg border border-amber-100 space-y-4">
+                <div class="relative overflow-hidden rounded-xl bg-slate-900 aspect-[4/3] flex items-center justify-center text-white">
+                    <video id="webcam" autoplay playsinline class="w-full h-full object-cover scale-x-[-1]"></video>
+                    <canvas id="photo-canvas" class="hidden absolute top-0 left-0 w-full h-full object-cover scale-x-[-1]"></canvas>
+                    <div class="absolute bottom-3 left-3 right-3 flex justify-between items-end pointer-events-none text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
+                        <div class="text-xs font-semibold tracking-wide bg-black/40 backdrop-blur-xs px-2 py-1 rounded">✨ Reuni Keluarga Besar ✨</div>
+                        <div class="text-[10px] opacity-90 font-mono bg-emerald-900/60 backdrop-blur-xs px-2 py-1 rounded">Syawal 1447H</div>
+                    </div>
+                </div>
+                <div class="flex justify-center gap-3">
+                    <button id="btn-capture" onclick="takeSnapshot()" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-semibold py-3 px-6 rounded-xl shadow-md transition flex justify-center items-center gap-2">📷 Ambil Foto</button>
+                    <button id="btn-retake" onclick="resetCamera()" class="hidden w-full bg-slate-500 hover:bg-slate-600 text-white font-semibold py-3 px-6 rounded-xl shadow-md transition">🔄 Foto Ulang</button>
+                </div>
+                <div id="save-form" class="hidden pt-2 border-t border-slate-100 space-y-3">
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-600 mb-1">Nama / Keluarga Dari:</label>
+                        <input type="text" id="photo-sender" placeholder="Contoh: Ragil & Keluarga" class="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-600 mb-1">Ucapan Hangat:</label>
+                        <input type="text" id="photo-caption" placeholder="Contoh: Minal Aidin Wal Faizin, mohon maaf lahir batin!" class="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500">
+                    </div>
+                    <button onclick="saveToAlbum()" class="w-full bg-amber-500 hover:bg-amber-600 text-white font-semibold py-2.5 rounded-lg shadow-sm transition">🚀 Bagikan ke Live Album</button>
+                </div>
+            </div>
+        </section>
+
+        <section id="page-album" class="page-view space-y-6">
+            <div class="flex flex-col sm:flex-row justify-between items-center py-4 gap-4 border-b border-amber-200/60 pb-6">
+                <div class="text-center sm:text-left">
+                    <h2 class="text-2xl font-bold text-emerald-900">Live Album Reuni</h2>
+                    <p class="text-sm text-slate-600">Kumpulan momen spontan dan ucapan hangat dari keluarga.</p>
+                </div>
+                <button id="btn-download-pdf" onclick="downloadAlbumPDF()" class="bg-amber-500 hover:bg-amber-600 text-white px-5 py-2.5 rounded-xl text-sm font-semibold shadow-md transition flex items-center gap-2 print:hidden">📥 Download Album (PDF)</button>
+            </div>
+            <div id="album-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6"></div>
+            <div id="album-empty" class="hidden text-center py-12 bg-white rounded-2xl border border-dashed border-slate-300 print:hidden">
+                <p class="text-slate-400 text-lg">Belum ada foto yang diabadikan.</p>
+                <button onclick="switchPage('booth')" class="mt-3 inline-block bg-emerald-600 text-white px-4 py-2 rounded-lg text-sm">Mulai Ambil Foto Pertama</button>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-slate-100 border-t border-slate-200 py-4 text-center text-xs text-slate-500 print:hidden">
+        <p>&copy; 2026 NDN Reunion Booth. Ditulis oleh Angga & Rahmi.</p>
+    </footer>
+
+    <script>
+        const video = document.getElementById('webcam');
+        const canvas = document.getElementById('photo-canvas');
+        const btnCapture = document.getElementById('btn-capture');
+        const btnRetake = document.getElementById('btn-retake');
+        const saveForm = document.getElementById('save-form');
+        const albumGrid = document.getElementById('album-grid');
+        const albumEmpty = document.getElementById('album-empty');
+        let streamData = null;
+        let albumPhotos = [];
+
+        async function initCamera() {
+            if (streamData) return;
+            try {
+                streamData = await navigator.mediaDevices.getUserMedia({video: { facingMode: "user" }, audio: false});
+                video.srcObject = streamData;
+                video.classList.remove('hidden');
+                canvas.classList.add('hidden');
+            } catch (err) {
+                console.error(err);
+                alert('Ijinkan kamera untuk menggunakan fitur photobooth NDN.');
+            }
+        }
+
+        function stopCamera() {
+            if (streamData) {
+                streamData.getTracks().forEach(track => track.stop());
+                streamData = null;
+            }
+        }
+
+        function takeSnapshot() {
+            const context = canvas.getContext('2d');
+            canvas.width = video.videoWidth;
+            canvas.height = video.videoHeight;
+            context.drawImage(video, 0, 0, canvas.width, canvas.height);
+            video.classList.add('hidden');
+            canvas.classList.remove('hidden');
+            btnCapture.className = 'hidden';
+            btnRetake.classList.remove('hidden');
+            saveForm.classList.remove('hidden');
+        }
+
+        function resetCamera() {
+            video.classList.remove('hidden');
+            canvas.classList.add('hidden');
+            btnCapture.className = 'w-full bg-emerald-600 hover:bg-emerald-700 text-white font-semibold py-3 px-6 rounded-xl shadow-md transition flex justify-center items-center gap-2';
+            btnRetake.classList.add('hidden');
+            saveForm.classList.add('hidden');
+            document.getElementById('photo-sender').value = '';
+            document.getElementById('photo-caption').value = '';
+        }
+
+        function saveToAlbum() {
+            const sender = document.getElementById('photo-sender').value.trim() || 'Keluarga NDN';
+            const caption = document.getElementById('photo-caption').value.trim() || 'Selamat berkumpul!';
+            const imageDataUrl = canvas.toDataURL('image/jpeg', 0.8);
+            albumPhotos.push({ id: Date.now(), sender, caption, image: imageDataUrl });
+            switchPage('album');
+        }
+
+        function renderAlbum() {
+            albumGrid.innerHTML = '';
+            if (!albumPhotos.length) {
+                albumEmpty.classList.remove('hidden');
+                return;
+            }
+            albumEmpty.classList.add('hidden');
+            albumPhotos.forEach(photo => {
+                const card = document.createElement('div');
+                card.className = 'bg-white rounded-3xl overflow-hidden shadow-lg';
+                card.innerHTML = `
+                    <img src="${photo.image}" alt="Foto Reuni" class="w-full h-56 object-cover">
+                    <div class="p-4">
+                        <h3 class="font-semibold text-slate-900">${photo.sender}</h3>
+                        <p class="text-slate-600 text-sm mt-2">${photo.caption}</p>
+                    </div>
+                `;
+                albumGrid.appendChild(card);
+            });
+        }
+
+        function downloadAlbumPDF() {
+            alert('Fitur PDF akan segera tersedia untuk NDN Reunion Booth.');
+        }
+
+        function switchPage(pageId) {
+            document.querySelectorAll('.page-view').forEach(view => view.classList.remove('active'));
+            document.getElementById(`page-${pageId}`).classList.add('active');
+            if (pageId === 'booth') {
+                initCamera();
+            } else {
+                stopCamera();
+                renderAlbum();
+            }
+        }
+
+        initCamera();
+    </script>
+</body>
+</html>
